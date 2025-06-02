@@ -41,12 +41,12 @@ This collection includes the app frontend, machine learning pipelines, annotatio
 ---
 
 ## Architecture Summary
+```mermaid
+flowchart TD
+    A[📸 Image Upload] --> B[🔍 ViT + LLM for Attribute Extraction]
+    B --> C[📄 JSON Attributes]
+    C --> D[🧑‍🏫 User Annotations / Preferences]
+    D --> E[🧠 Train DNN Matching Model]
+    E --> F[📦 Export to TFLite]
+    F --> G[📱 Android App Inference]
 
-```text
-[Image] --(ViT + LLM)--> [Attribute JSON]
-                          ↓
-         [Annotated user choices / preferences]
-                          ↓
-                   [DNN Model Training]
-                          ↓
-               [TFLite Export + Android App]
