@@ -62,8 +62,9 @@ flowchart TD
     I1_b --> I_common
 
     %% Mode 2
-    I2_start["🧍 Mode 2: User-Guided Selection"] --> I2_a["User selects an item"]
-    I2_a --> I2_b["App anchors selected item"]
+    I2_start["🧍 Mode 2: User-Guided Selection"] --> I2_a["User opens wardrobe"]
+    I2_a --> I2_access["User selects an item"]
+    I2_access --> I2_b["App anchors selected item"]
     I2_b --> I2_c["Pairs with random items"]
     I2_b --> I2_fallback["🧹 User clears selection"]
     I2_fallback --> I1_b
@@ -95,5 +96,3 @@ flowchart TD
 
     %% Styling for external nodes
     classDef external stroke:#e74c3c,stroke-width:2px;
-
-
