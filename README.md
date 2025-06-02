@@ -59,7 +59,7 @@ flowchart TD
     %% Mode 1
     I1_start["🤖 Mode 1: Auto Pairing"] --> I1_a["User taps 'Generate'"]
     I1_a --> I1_b["App randomly pairs outfits"]
-    I1_b --> I_common["Pairs sent to TFLite model"]
+    I1_b --> I_common
 
     %% Mode 2
     I2_start["🧍 Mode 2: User-Guided Selection"] --> I2_a["User selects an item"]
@@ -77,20 +77,18 @@ flowchart TD
     %% Shared DL inference
     I_common["📲 Pairs sent to TFLite model"] --> I_final["✅ First 'like' is shown to user"]
 
-    %% External Systems — grouped
-    subgraph ext_services
-        ext_openai["🌐 OpenAI API"]:::external
-        ext_ec2["🖥️ AWS EC2"]:::external
-        ext_sagemaker["⚙️ AWS SageMaker"]:::external
-        ext_s3["📦 Amazon S3"]:::external
-    end
+    %% External systems as side nodes
+    ext_openai["🌐 OpenAI API"]:::external
+    ext_ec2["🖥️ AWS EC2"]:::external
+    ext_sagemaker["⚙️ AWS SageMaker"]:::external
+    ext_s3["📦 Amazon S3"]:::external
 
-    %% Integration arrows
-    B <--> ext_openai
-    I3_b <--> ext_ec2
-    F <--> ext_sagemaker
-    G <--> ext_s3
+    %% Arrows to external systems
+    B --> ext_openai
+    I3_b --> ext_ec2
+    F --> ext_sagemaker
+    G --> ext_s3
 
-    %% Style only border color, preserve text color
+    %% Styling for external nodes
     classDef external stroke:#e74c3c,stroke-width:2px;
 
