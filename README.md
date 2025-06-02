@@ -5,7 +5,7 @@
 <h1 align="center">Awesome DressMe.AI</h1>
 
 <p align="center">
-  <em>A curated collection of repositories powering the DressMe.AI platform — an intelligent outfit recommendation system using vision-language models and deep learning.</em>
+  <em>A curated collection of repositories powering the DressMe.AI app — an intelligent outfit recommendation system using VLM/LLM/ML pipelines for personalization.</em>
 </p>
 
 ---
