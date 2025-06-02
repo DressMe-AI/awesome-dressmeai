@@ -45,7 +45,7 @@ This collection includes the app frontend, machine learning pipelines, annotatio
 flowchart TD
     A["Image Upload: Wardrobe stored locally"] --> B
     A --> C
-    B["ViT + LLM Extraction: Attribute mapping"] --> D
+    B["ViT + LLM Extraction: Attribute mapping (OpenAI API)"] --> D
     C["User Feedback: Like/dislike random pairs"] --> E
     D["Structured Input Vectors"] --> F
     E["User Preference Labels"] --> F
@@ -57,8 +57,8 @@ flowchart TD
     I1["Mode 1: Auto Pairing"]
     I2["Mode 2: User-Guided Selection"]
     I3["Mode 3: Prompt-Based Recommendation"] --> J
-    J["Remote Agent (EC2)"] --> K
-    K["Retrieve Similar Items"] --> L
+    J["LLM Agent (EC2 + OpenAI API)"] --> K
+    K["Retrieve Similar Items via RAG"] --> L
     L["Filtered Wardrobe Items"] --> M
     M["TFLite Inference in App"]
 
