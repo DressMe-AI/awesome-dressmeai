@@ -44,8 +44,9 @@ This collection includes the app frontend, machine learning pipelines, annotatio
 ```mermaid
 flowchart TD
     %% Core pipeline
-    A["🖼️ Image Upload: Wardrobe stored locally"] --> B
+    A["🖼️ Image Upload"] --> B
     A --> C
+    B --> ext_openai
     B["🧠 ViT + LLM Extraction"] --> D
     C["👍👎 User Feedback: Like/dislike random pairs"] --> E
     D["🧾 Structured Input Vectors"] --> train_input
@@ -77,7 +78,8 @@ flowchart TD
     I3_a --> I3_fallback["🧹 User clears prompt"]
     I3_fallback --> I1_b
     I3_a --> I3_b["Prompt sent to LLM agent"]
-    I3_b --> I3_c["Agent returns matching item IDs"]
+    I3_b --> ext_ec2
+    ext_ec2 --> I3_c["Agent returns matching item IDs"]
     I3_c --> I3_d["App limits pairing to returned items"]
     I3_d --> I_common
 
@@ -87,10 +89,6 @@ flowchart TD
     %% External systems as side nodes
     ext_openai["🌐 OpenAI API"]:::external
     ext_ec2["🖥️ AWS EC2 + 🌐 OpenAI API + 🧲 RAG"]:::external
-
-    %% Arrows to external systems
-    B --> ext_openai
-    I3_b --> ext_ec2
 
     %% Styling for external nodes
     classDef external stroke:#e74c3c,stroke-width:2px;
