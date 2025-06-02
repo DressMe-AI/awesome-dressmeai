@@ -43,21 +43,19 @@ This collection includes the app frontend, machine learning pipelines, annotatio
 ## Architecture Summary
 ```mermaid
 flowchart TD
-    A[Image Upload\nWardrobe items stored locally] --> B[ViT + LLM Attribute Extraction\nMapped to input vectors]
-    A --> C[User Feedback\nRandom pair labeling]
-    B --> D[Structured Attribute Vectors]
-    C --> E[User Preference Labels]
-
-    D --> F[Train DL Model on SageMaker]
+    A[Image Upload\n(Wardrobe stored locally)] --> B[ViT + LLM Extraction\n(User keyword-focused)]
+    A --> C[User Feedback\n(Random pair labeling)]
+    B --> D[Attribute Vectors]
+    C --> E[Preference Labels]
+    D --> F[Train DL Model\n(on SageMaker)]
     E --> F
-    F --> G[Export TFLite Model to S3]
-    G --> H[Android App (Kotlin)]
+    F --> G[Export Model to .tflite\n(Store in S3)]
+    G --> H[Android App\n(Kotlin, TFLite integration)]
+    H --> I1[Mode 1: Auto Pairing\n(Random pairs → first liked)]
+    H --> I2[Mode 2: User-Guided\n(Selected item held fixed)]
+    H --> I3[Mode 3: Prompt-Based\n(Natural language input)]
+    I3 --> J[Remote Agent (EC2)\n(Prompt classification)]
+    J --> K[Retrieve Items\n(Semantic similarity)]
+    K --> L[Filtered Wardrobe Items]
+    L --> M[TFLite Inference\n(Display first liked pair)]
 
-    H --> I1[Mode 1: Auto Pairing\nRandom pairing, first liked shown]
-    H --> I2[Mode 2: User-Guided\nUser selects 1 item before pairing]
-    H --> I3[Mode 3: Prompt-Based\nFree-text recommendation]
-
-    I3 --> J[Remote Agent (EC2)\nPrompt classification + retrieval]
-    J --> K[Retrieve Relevant Items\nSemantic similarity]
-    K --> L[Filtered Wardrobe]
-    L --> M[TFLite Inference and Display]
