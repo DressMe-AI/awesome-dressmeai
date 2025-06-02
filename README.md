@@ -71,7 +71,7 @@ flowchart TD
 
     %% Mode 3: Prompt-Based Recommendation (abstracted)
     I3_start["💬 Mode 3: Prompt-Based Recommendation"] --> I3_a["User enters free-text prompt"]
-    I3_a --> I3_b["Prompt sent to remote agent"]
+    I3_a --> I3_b["Prompt sent to LLM agent for semantic analysis (RAG) (EC2 + OpenAI API)"]
     I3_b --> I3_c["Agent returns matching item IDs"]
     I3_c --> I3_d["App limits pairing to returned items"]
     I3_d --> I3_e["Pairs sent to TFLite model"]
