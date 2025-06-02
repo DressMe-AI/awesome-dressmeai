@@ -92,7 +92,6 @@ flowchart TD
     %% Arrows to external systems
     B --> ext_openai
     I3_b --> ext_ec2
-    F --> ext_sagemaker
 
     %% Styling for external nodes
     classDef external stroke:#e74c3c,stroke-width:2px;
