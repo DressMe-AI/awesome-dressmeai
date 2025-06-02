@@ -43,38 +43,59 @@ This collection includes the app frontend, machine learning pipelines, annotatio
 ## Architecture Summary
 ```mermaid
 flowchart TD
+    %% Core pipeline
     A["🖼️ Image Upload: Wardrobe stored locally"] --> B
     A --> C
-    B["🧠 ViT + LLM Extraction: Attribute mapping (OpenAI API)"] --> D
+    B["🧠 ViT + LLM Extraction"] --> D
     C["👍👎 User Feedback: Like/dislike random pairs"] --> E
     D["🧾 Structured Input Vectors"] --> F
     E["🏷️ User Preference Labels"] --> F
-    F["📈 Train Model (AWS SageMaker)"] --> G
-    G["🛠️ Export to .tflite on S3"] --> H
+    F["📈 Train Model"] --> G
+    G["🛠️ Export to .tflite"] --> H
     H["📱 Android App (Kotlin)"] --> I1_start
     H --> I2_start
     H --> I3_start
 
-    %% Mode 1: Auto Pairing
+    %% Mode 1
     I1_start["🤖 Mode 1: Auto Pairing"] --> I1_a["User taps 'Generate'"]
     I1_a --> I1_b["App randomly pairs outfits"]
     I1_b --> I_common["Pairs sent to TFLite model"]
 
-    %% Mode 2: User-Guided Selection
+    %% Mode 2
     I2_start["🧍 Mode 2: User-Guided Selection"] --> I2_a["User selects an item"]
     I2_a --> I2_b["App anchors selected item"]
     I2_b --> I2_c["Pairs with random items"]
     I2_c --> I_common
 
-    %% Mode 3: Prompt-Based Recommendation (abstracted)
-    I3_start["💬 Mode 3: Prompt-Based Recommendation"] --> I3_a["User enters free-text prompt [AWS EC2 + OpenAI API + RAG]"]
-    I3_a --> I3_b["Prompt sent to LLM agent for semantic analysis"]
+    %% Mode 3
+    I3_start["💬 Mode 3: Prompt-Based Recommendation"] --> I3_a["User enters free-text prompt"]
+    I3_a --> I3_b["Prompt sent to LLM agent"]
     I3_b --> I3_c["Agent returns matching item IDs"]
     I3_c --> I3_d["App limits pairing to returned items"]
     I3_d --> I_common
 
-    %% Shared final inference
+    %% Shared DL inference
     I_common["📲 Pairs sent to TFLite model"] --> I_final["✅ First 'like' is shown to user"]
 
+    %% External systems as side nodes
+    ext_openai["🌐 OpenAI API"]:::external
+    ext_ec2["🖥️ AWS EC2 (Agent Host)"]:::external
+    ext_sagemaker["⚙️ AWS SageMaker"]:::external
+    ext_s3["📦 Amazon S3"]:::external
 
+    %% Arrows for external interaction
+    B --> ext_openai
+    ext_openai --> B
+
+    I3_b --> ext_ec2
+    ext_ec2 --> I3_b
+
+    F --> ext_sagemaker
+    ext_sagemaker --> F
+
+    G --> ext_s3
+    ext_s3 --> G
+
+    %% Style definitions
+    classDef external stroke:#c00,stroke-width:2px,color:#000
 
