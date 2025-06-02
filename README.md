@@ -87,7 +87,7 @@ flowchart TD
     B --> ext_openai
     I3_b --> ext_ec2
     F --> ext_sagemaker
-    H --> ext_s3
+    G --> ext_s3
 
     %% Styling for external nodes
     classDef external stroke:#e74c3c,stroke-width:2px;
