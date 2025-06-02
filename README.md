@@ -96,3 +96,18 @@ flowchart TD
 
     %% Styling for external nodes
     classDef external stroke:#e74c3c,stroke-width:2px;
+```
+
+## App Screenshots
+
+### Home Screen / Recommendation based on general user preference
+<img src="assets/mode_1_auto_pairing.png" width="250"/>
+
+### Wardrobe View
+<img src="assets/mode_2_wardrobe.png" width="250"/>
+
+### Select an Item
+<img src="assets/mode_2_wardrobe_select_item.png" width="250"/>
+
+### Recommended with User Preferred Item
+<img src="assets/mode_2_selected_item_paired.png" width="250"/>
