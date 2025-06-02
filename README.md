@@ -1,3 +1,5 @@
+<img src="app/src/main/ic_launcher-playstore.png" alt="App Logo" width="150"/>
+
 # Awesome DressMe.AI
 
 > A curated collection of repositories powering the DressMe.AI platform — an intelligent outfit recommendation system using vision-language models and deep learning.
