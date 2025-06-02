@@ -22,7 +22,7 @@ This collection includes the app frontend, machine learning pipelines, annotatio
 
 ### Frontend
 
-- [`dressme-app`](https://github.com/DressMe-AI/dressme-app) – Main Android app with TensorFlow Lite model integration. Supports on-device outfit pairing and user feedback collection.
+- [`dressme-app`](https://github.com/DressMe-AI/dressme-app) – Main Android app (DEMO) with TensorFlow Lite model integration. Supports on-device outfit pairing and user feedback collection.
 
 ### Machine Learning
 
@@ -35,7 +35,7 @@ This collection includes the app frontend, machine learning pipelines, annotatio
 
 ### Infrastructure
 
-- [`dressme-agentic`](https://github.com/DressMe-AI/dressme-agentic) – *(Private)* Agentic interface to personalize recommendations via LLM-based reasoning.
+- [`dressme-agentic`](https://github.com/DressMe-AI/dressme-agentic) – *(Private)* Main App with Agentic interface to personalize recommendations via LLM-based reasoning.
 - [`dressme-ec2`](https://github.com/DressMe-AI/dressme-ec2) – *(Private)* EC2 setup and deployment infrastructure for inference and annotation hosting.
 
 ---
