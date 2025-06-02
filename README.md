@@ -51,11 +51,11 @@ flowchart TD
     D["🧾 Structured Input Vectors"] --> F
     E["🏷️ User Preference Labels"] --> F
     F["📈 Train DL System"] --> G
-    G["🛠️ Deploy as .tflite"] --> H1
-    H1["📦 Amazon S3"] --> H2
-    H2["📱 Android App (Kotlin)"] --> I1_start
-    H --> I2_start
-    H --> I3_start
+    G["🛠️ Export model as .tflite"] --> S3_upload
+    S3_upload["📦 Upload to Amazon S3"]:::external --> H_app
+    H_app["📱 Android App (Kotlin)"] --> I1_start
+    H_app --> I2_start
+    H_app --> I3_start
 
     %% Mode 1
     I1_start["🤖 Mode 1: Auto Pairing"] --> I1_a["User taps 'Generate'"]
