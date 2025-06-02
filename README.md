@@ -48,11 +48,12 @@ flowchart TD
     A --> C
     B["🧠 ViT + LLM Extraction"] --> D
     C["👍👎 User Feedback: Like/dislike random pairs"] --> E
-    D["🧾 Structured Input Vectors"] --> F
-    E["🏷️ User Preference Labels"] --> F
-    F["📈 Train DL System"] --> G
-    G["🛠️ Export model as .tflite"] --> S3_upload
-    S3_upload["📦 Upload to Amazon S3"]:::external --> H_app
+    D["🧾 Structured Input Vectors"] --> train_input
+    E["🏷️ User Preference Labels"] --> train_input
+    train_input["📦 Inputs to SageMaker"] --> sagemaker["⚙️ AWS SageMaker"]:::external
+    sagemaker --> tflite_export["🛠️ Export trained model (.tflite)"]
+    tflite_export --> S3_upload["📦 Upload to Amazon S3"]:::external
+    S3_upload --> H_app["📱 Android App (Kotlin)"]
     H_app["📱 Android App (Kotlin)"] --> I1_start
     H_app --> I2_start
     H_app --> I3_start
@@ -95,6 +96,8 @@ flowchart TD
 
     %% Styling for external nodes
     classDef external stroke:#e74c3c,stroke-width:2px;
+    class S3_upload,sagemaker external;
+
 ```
 
 ## App Screenshots
