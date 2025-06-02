@@ -43,10 +43,21 @@ This collection includes the app frontend, machine learning pipelines, annotatio
 ## Architecture Summary
 ```mermaid
 flowchart TD
-    A[📸 Image Upload] --> B[🔍 ViT + LLM for Attribute Extraction]
-    B --> C[📄 JSON Attributes]
-    C --> D[🧑‍🏫 User Annotations / Preferences]
-    D --> E[🧠 Train DNN Matching Model]
-    E --> F[📦 Export to TFLite]
-    F --> G[📱 Android App Inference]
+    A[🧥 Image Upload<br/>Wardrobe items selected by user and stored locally] --> B[🔍 ViT + LLM Attribute Extraction<br/>OpenAI API extracts user-relevant attributes and maps to model input]
+    A --> C[🤖 User Feedback<br/>Random outfit pairs shown for like/dislike labeling]
+    B --> D[🔢 Structured Input Vectors]
+    C --> E[❤️ User Preference Labels]
 
+    D & E --> F[🧠 Train Deep Learning Model<br/>on AWS SageMaker using attributes and preferences]
+
+    F --> G[💾 Export TFLite Model<br/>Model uploaded to S3 for app use]
+    G --> H[📱 Android App (Kotlin)]
+
+    H --> I1[🔁 Recommendation (Default Mode)<br/>Random pairing, first liked result shown]
+    H --> I2[🧭 User-Driven Recommendation<br/>User selects item, paired until liked combo found]
+    H --> I3[💬 Prompt-Based Recommendation<br/>User enters free-form prompt]
+
+    I3 --> J[🛰️ Server-side Agent (AWS EC2)<br/>Classifies prompt and fetches relevant clothing]
+    J --> K[📦 Filter Wardrobe for Relevant Items<br/>Based on similarity-matched embeddings]
+
+    K --> H
