@@ -45,21 +45,56 @@ This collection includes the app frontend, machine learning pipelines, annotatio
 flowchart TD
     A["🖼️ Image Upload: Wardrobe stored locally"] --> B
     A --> C
-    B["🧠 ViT + LLM Extraction: Attribute mapping (OpenAI API)"] --> D
-    C["👍👎 User Feedback: Like/dislike random pairs"] --> E
+    B["🧠 ViT + LLM Extraction: Attribute mapping (OpenAI API)
+    - User-defined relevant categories
+    - Transforms to structured numerical vectors"] --> D
+    C["👍👎 User Feedback: Like/dislike random pairs
+    - Shown after upload
+    - Parallel to extraction"] --> E
     D["🧾 Structured Input Vectors"] --> F
     E["🏷️ User Preference Labels"] --> F
-    F["📈 Train Model on SageMaker"] --> G
+    F["📈 Train Model on SageMaker
+    - Uses image vectors + labels
+    - Deep classifier trained"] --> G
     G["🛠️ Export to .tflite on S3"] --> H
-    H["📱 Android App (Kotlin)"] --> I1
+    H["📱 Android App (Kotlin)
+    - Loads TFLite model from S3
+    - Local wardrobe access"] --> I1
     H --> I2
     H --> I3
-    I1["🤖 Mode 1: Auto Pairing"]
-    I2["🧍 Mode 2: User-Guided Selection"]
-    I3["💬 Mode 3: Prompt-Based Recommendation"] --> J
-    J["🧠 LLM Agent (EC2 + OpenAI API)"] --> K
-    K["🔍 Retrieve Similar Items via RAG"] --> L
-    L["🎯 Filtered Wardrobe Items"] --> M
-    M["📲 TFLite Inference in App"]
 
+    I1["🤖 Mode 1: Auto Pairing
+    - User taps 'Generate'
+    - App randomly pairs outfits
+    - TFLite predicts 'like'
+    - First positive combo is shown"]
+
+    I2["🧍 Mode 2: User-Guided Selection
+    - User picks wardrobe item
+    - App anchors item during pairing
+    - TFLite scores combinations
+    - First 'like' is displayed"]
+
+    I3["💬 Mode 3: Prompt-Based Recommendation
+    - User enters free-text prompt
+    - Sent to EC2 agent (FastAPI)
+    - If clothing-related, performs retrieval
+    - Filters wardrobe items for pairing"] --> J
+
+    J["🧠 LLM Agent (EC2 + OpenAI API)
+    - Interprets intent
+    - Maps prompt to semantic space
+    - Retrieves top-N similar items"] --> K
+
+    K["🔍 Retrieve Similar Items via RAG
+    - Uses prompt-item similarity
+    - Returns matched item IDs"] --> L
+
+    L["🎯 Filtered Wardrobe Items
+    - Limited to RAG-retrieved set
+    - Passed to TFLite"] --> M
+
+    M["📲 TFLite Inference in App
+    - Final DL scoring
+    - Recommendation rendered"]
 
