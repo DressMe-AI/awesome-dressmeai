@@ -53,23 +53,29 @@ flowchart TD
     G["🛠️ Export to .tflite on S3"] --> H
     H["📱 Android App (Kotlin)"] --> I1_start
     H --> I2_start
-    H --> I3
+    H --> I3_start
+
+    %% Mode 1: Auto Pairing
     I1_start["🤖 Mode 1: Auto Pairing"] --> I1_a["User taps 'Generate'"]
     I1_a --> I1_b["App randomly pairs outfits"]
     I1_b --> I1_c["Pairs sent to TFLite model"]
     I1_c --> I1_d["Model returns prediction"]
     I1_d --> I1_e["First 'like' is shown to user"]
 
+    %% Mode 2: User-Guided Selection
     I2_start["🧍 Mode 2: User-Guided Selection"] --> I2_a["User selects an item"]
     I2_a --> I2_b["App anchors selected item"]
     I2_b --> I2_c["Pairs with random items"]
     I2_c --> I2_d["Pairs sent to TFLite model"]
     I2_d --> I2_e["First 'like' is shown to user"]
 
-    I3["💬 Mode 3: Prompt-Based Recommendation"] --> J
-    J["🧠 LLM Agent (EC2 + OpenAI API)"] --> K
-    K["🔍 Retrieve Similar Items via RAG"] --> L
-    L["🎯 Filtered Wardrobe Items"] --> M
-    M["📲 TFLite Inference in App"]
+    %% Mode 3: Prompt-Based Recommendation (abstracted)
+    I3_start["💬 Mode 3: Prompt-Based Recommendation"] --> I3_a["User enters free-text prompt"]
+    I3_a --> I3_b["Prompt sent to remote agent"]
+    I3_b --> I3_c["Agent returns matching item IDs"]
+    I3_c --> I3_d["App limits pairing to returned items"]
+    I3_d --> I3_e["Pairs sent to TFLite model"]
+    I3_e --> I3_f["First 'like' is shown to user"]
+
 
 
