@@ -87,7 +87,6 @@ flowchart TD
     %% External systems as side nodes
     ext_openai["🌐 OpenAI API"]:::external
     ext_ec2["🖥️ AWS EC2 + 🌐 OpenAI API + 🧲 RAG"]:::external
-    ext_sagemaker["⚙️ AWS SageMaker"]:::external
 
     %% Arrows to external systems
     B --> ext_openai
