@@ -35,7 +35,7 @@ This collection includes the app frontend, machine learning pipelines, annotatio
 
 ### Infrastructure
 
-- [`dressme-agentic`](https://github.com/DressMe-AI/dressme-agentic) – *(Private)* Main App (DEPLOYED) + Agentic interface to personalize recommendations via LLM-based reasoning.
+- [`dressme-agentic`](https://github.com/DressMe-AI/dressme-agentic) – *(Private)* Main App (DEPLOYED for private use. CI/CD with human-in-the-loop maintaned.) + Agentic interface to personalize recommendations via LLM-based reasoning.
 - [`dressme-ec2`](https://github.com/DressMe-AI/dressme-ec2) – *(Private)* EC2 setup and deployment infrastructure for inference and annotation hosting.
 
 ---
