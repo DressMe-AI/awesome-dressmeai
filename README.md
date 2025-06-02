@@ -43,19 +43,22 @@ This collection includes the app frontend, machine learning pipelines, annotatio
 ## Architecture Summary
 ```mermaid
 flowchart TD
-    A[Image Upload: Wardrobe stored locally] --> B[ViT + LLM Extraction: Attribute mapping]
-    A --> C[User Feedback: Like/dislike random pairs]
-    B --> D[Structured Input Vectors]
-    C --> E[User Preference Labels]
-    D --> F[Train Model on SageMaker]
-    E --> F
-    F --> G[Export to .tflite on S3]
-    G --> H[Android App (Kotlin)]
-    H --> I1[Mode 1: Auto Pairing]
-    H --> I2[Mode 2: User-Guided Selection]
-    H --> I3[Mode 3: Prompt-Based Recommendation]
-    I3 --> J[Remote Agent (EC2)]
-    J --> K[Retrieve Similar Items]
-    K --> L[Filtered Wardrobe Items]
-    L --> M[TFLite Inference in App]
+    A[Image Upload: Wardrobe stored locally] --> B
+    A --> C
+    B[ViT + LLM Extraction: Attribute mapping] --> D
+    C[User Feedback: Like/dislike random pairs] --> E
+    D[Structured Input Vectors] --> F
+    E[User Preference Labels] --> F
+    F[Train Model on SageMaker] --> G
+    G[Export to .tflite on S3] --> H
+    H[Android App (Kotlin)] --> I1
+    H --> I2
+    H --> I3
+    I1[Mode 1: Auto Pairing]
+    I2[Mode 2: User-Guided Selection]
+    I3[Mode 3: Prompt-Based Recommendation] --> J
+    J[Remote Agent (EC2)] --> K
+    K[Retrieve Similar Items] --> L
+    L[Filtered Wardrobe Items] --> M
+    M[TFLite Inference in App]
 
