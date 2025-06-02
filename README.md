@@ -46,7 +46,7 @@ flowchart TD
     %% Core pipeline
     A["🖼️ Image Upload"] --> B
     A --> C
-    B --> ext_openai
+    ext_openai["🌐 OpenAI API"] --> B
     B["🧠 ViT + LLM Extraction"] --> D
     C["👍👎 User Feedback: Like/dislike random pairs"] --> E
     D["🧾 Structured Input Vectors"] --> train_input
