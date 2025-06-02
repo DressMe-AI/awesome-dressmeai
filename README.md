@@ -44,10 +44,10 @@ This collection includes the app frontend, machine learning pipelines, annotatio
 ```mermaid
 flowchart TD
     %% Core pipeline
-    A["🖼️ Image Upload"] --> B
-    A --> C
-    ext_openai["🌐 OpenAI API"] --> B
+    A["🖼️ Image Upload"] --> openai_call
+    openai_call["🌐 OpenAI API"]:::highlighted --> B
     B["🧠 ViT + LLM Extraction"] --> D
+    A --> C
     C["👍👎 User Feedback: Like/dislike random pairs"] --> E
     D["🧾 Structured Input Vectors"] --> train_input
     E["🏷️ User Preference Labels"] --> train_input
@@ -55,7 +55,7 @@ flowchart TD
     sagemaker --> tflite_export["🛠️ Export trained model (.tflite)"]
     tflite_export --> S3_upload["📦 Upload to Amazon S3"]:::external
     S3_upload --> H_app["📱 Android App (Kotlin)"]
-    H_app["📱 Android App (Kotlin)"] --> I1_start
+    H_app --> I1_start
     H_app --> I2_start
     H_app --> I3_start
 
@@ -79,20 +79,18 @@ flowchart TD
     I3_fallback --> I1_b
     I3_a --> I3_b["Prompt sent to LLM agent"]
     I3_b --> ext_ec2
-    ext_ec2 --> I3_c["Agent returns matching item IDs"]
+    ext_ec2["🖥️ AWS EC2 + 🌐 OpenAI API + 🧲 RAG"]:::external --> I3_c["Agent returns matching item IDs"]
     I3_c --> I3_d["App limits pairing to returned items"]
     I3_d --> I_common
 
     %% Shared DL inference
     I_common["📲 Pairs sent to TFLite model"] --> I_final["✅ First 'like' is shown to user"]
 
-    %% External systems as side nodes
-    ext_openai["🌐 OpenAI API"]:::external
-    ext_ec2["🖥️ AWS EC2 + 🌐 OpenAI API + 🧲 RAG"]:::external
-
-    %% Styling for external nodes
+    %% Styling
     classDef external stroke:#e74c3c,stroke-width:2px;
-    class S3_upload,sagemaker external;
+    classDef highlighted stroke:#e74c3c,stroke-width:2px;
+    class openai_call highlighted;
+    class ext_ec2,sagemaker,S3_upload external;
 
 ```
 
