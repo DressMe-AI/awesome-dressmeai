@@ -1,10 +1,14 @@
-<img src="assets/ic_launcher-playstore.png" alt="App Logo" width="150"/>
+<table>
+  <tr>
+    <td><img src="assets/ic_launcher-playstore.png" alt="App Logo" width="100"/></td>
+    <td>
+      <h1>Awesome DressMe.AI</h1>
+      <p><em>A curated collection of repositories powering the DressMe.AI platform — an intelligent outfit recommendation system using vision-language models and deep learning.</em></p>
+    </td>
+  </tr>
+</table>
 
-# Awesome DressMe.AI
-
-> A curated collection of repositories powering the DressMe.AI platform — an intelligent outfit recommendation system using vision-language models and deep learning.
-
----
+<hr/>
 
 ## Overview
 
