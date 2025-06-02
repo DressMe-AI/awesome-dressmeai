@@ -77,25 +77,20 @@ flowchart TD
     %% Shared DL inference
     I_common["📲 Pairs sent to TFLite model"] --> I_final["✅ First 'like' is shown to user"]
 
-    %% External systems as side nodes
-    ext_openai["🌐 OpenAI API"]:::external
-    ext_ec2["🖥️ AWS EC2 (Agent Host)"]:::external
-    ext_sagemaker["⚙️ AWS SageMaker"]:::external
-    ext_s3["📦 Amazon S3"]:::external
+    %% External Systems — grouped and styled
+    subgraph ext_services[""]
+        direction TB
+        ext_openai["🌐 OpenAI API"]:::external
+        ext_ec2["🖥️ AWS EC2"]:::external
+        ext_sagemaker["⚙️ AWS SageMaker"]:::external
+        ext_s3["📦 Amazon S3"]:::external
+    end
 
-    %% Arrows for external interaction
-    B --> ext_openai
-    ext_openai --> B
+    %% Integration arrows
+    B <--> ext_openai
+    I3_b <--> ext_ec2
+    F <--> ext_sagemaker
+    G <--> ext_s3
 
-    I3_b --> ext_ec2
-    ext_ec2 --> I3_b
-
-    F --> ext_sagemaker
-    ext_sagemaker --> F
-
-    G --> ext_s3
-    ext_s3 --> G
-
-    %% Style definitions
-    classDef external stroke:#c00,stroke-width:2px,color:#000
-
+    %% Style only border color, preserve text color
+    classDef external stroke:#e74c3c,stroke-width:2px,fill:#1e1e1e;
