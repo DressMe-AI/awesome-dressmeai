@@ -51,8 +51,9 @@ flowchart TD
     D["🧾 Structured Input Vectors"] --> F
     E["🏷️ User Preference Labels"] --> F
     F["📈 Train DL System"] --> G
-    G["🛠️ Deploy as .tflite"] --> H
-    H["📱 Android App (Kotlin)"] --> I1_start
+    G["🛠️ Deploy as .tflite"] --> H1
+    H1["📦 Amazon S3"] --> H2
+    H2["📱 Android App (Kotlin)"] --> I1_start
     H --> I2_start
     H --> I3_start
 
@@ -86,13 +87,11 @@ flowchart TD
     ext_openai["🌐 OpenAI API"]:::external
     ext_ec2["🖥️ AWS EC2 + 🌐 OpenAI API + 🧲 RAG"]:::external
     ext_sagemaker["⚙️ AWS SageMaker"]:::external
-    ext_s3["📦 Amazon S3"]:::external
 
     %% Arrows to external systems
     B --> ext_openai
     I3_b --> ext_ec2
     F --> ext_sagemaker
-    G --> ext_s3
 
     %% Styling for external nodes
     classDef external stroke:#e74c3c,stroke-width:2px;
