@@ -43,21 +43,21 @@ This collection includes the app frontend, machine learning pipelines, annotatio
 ## Architecture Summary
 ```mermaid
 flowchart TD
-    A[🧥 Image Upload<br/>Wardrobe items selected by user and stored locally] --> B[🔍 ViT + LLM Attribute Extraction<br/>Attributes mapped to vectors]
-    A --> C[🤖 User Feedback<br/>Random pairs shown for like/dislike labeling]
-    B --> D[🔢 Structured Attribute Vectors]
-    C --> E[❤️ User Preference Labels]
+    A[Image Upload\nWardrobe items stored locally] --> B[ViT + LLM Attribute Extraction\nMapped to input vectors]
+    A --> C[User Feedback\nRandom pair labeling]
+    B --> D[Structured Attribute Vectors]
+    C --> E[User Preference Labels]
 
-    D --> F[🧠 Train DL Model<br/>on AWS SageMaker]
+    D --> F[Train DL Model on SageMaker]
     E --> F
-    F --> G[💾 Export to .tflite<br/>Model stored in S3]
-    G --> H[📱 Android App (Kotlin)]
+    F --> G[Export TFLite Model to S3]
+    G --> H[Android App (Kotlin)]
 
-    H --> I1[🔁 Mode 1: Auto Pairing<br/>Random pairing → first liked shown]
-    H --> I2[🧭 Mode 2: User-Guided<br/>User selects 1 item → paired until liked]
-    H --> I3[💬 Mode 3: Prompt-Based<br/>User types free-form preference]
+    H --> I1[Mode 1: Auto Pairing\nRandom pairing, first liked shown]
+    H --> I2[Mode 2: User-Guided\nUser selects 1 item before pairing]
+    H --> I3[Mode 3: Prompt-Based\nFree-text recommendation]
 
-    I3 --> J[🛰️ Remote Agent (EC2)<br/>Classifies + maps prompt]
-    J --> K[📦 Retrieve Relevant Items<br/>via semantic similarity]
-    K --> L[🎯 Filtered Wardrobe]
-    L --> M[🔁 Send to TFLite for pairing + ranking]
+    I3 --> J[Remote Agent (EC2)\nPrompt classification + retrieval]
+    J --> K[Retrieve Relevant Items\nSemantic similarity]
+    K --> L[Filtered Wardrobe]
+    L --> M[TFLite Inference and Display]
