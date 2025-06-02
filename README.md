@@ -50,8 +50,8 @@ flowchart TD
     C["👍👎 User Feedback: Like/dislike random pairs"] --> E
     D["🧾 Structured Input Vectors"] --> F
     E["🏷️ User Preference Labels"] --> F
-    F["📈 Train Model"] --> G
-    G["🛠️ Export to .tflite"] --> H
+    F["📈 Train DL System"] --> G
+    G["🛠️ Deploy as .tflite"] --> H
     H["📱 Android App (Kotlin)"] --> I1_start
     H --> I2_start
     H --> I3_start
@@ -87,7 +87,7 @@ flowchart TD
     B --> ext_openai
     I3_b --> ext_ec2
     F --> ext_sagemaker
-    G --> ext_s3
+    H --> ext_s3
 
     %% Styling for external nodes
     classDef external stroke:#e74c3c,stroke-width:2px;
