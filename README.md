@@ -65,10 +65,14 @@ flowchart TD
     I2_start["🧍 Mode 2: User-Guided Selection"] --> I2_a["User selects an item"]
     I2_a --> I2_b["App anchors selected item"]
     I2_b --> I2_c["Pairs with random items"]
+    I2_b --> I2_fallback["🧹 User clears selection"]
+    I2_fallback --> I1_b
     I2_c --> I_common
 
     %% Mode 3
     I3_start["💬 Mode 3: Prompt-Based Recommendation"] --> I3_a["User enters free-text prompt"]
+    I3_a --> I3_fallback["🧹 User clears prompt"]
+    I3_fallback --> I1_b
     I3_a --> I3_b["Prompt sent to LLM agent"]
     I3_b --> I3_c["Agent returns matching item IDs"]
     I3_c --> I3_d["App limits pairing to returned items"]
@@ -91,4 +95,5 @@ flowchart TD
 
     %% Styling for external nodes
     classDef external stroke:#e74c3c,stroke-width:2px;
+
 
