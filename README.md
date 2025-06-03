@@ -92,6 +92,10 @@ flowchart TD
     class openai_call highlighted;
     class ext_ec2,sagemaker,S3_upload external;
 
+    %% Feedback loop for CI/CD-style retraining
+    I_final --> feedback_loop["🔁 User feedback (post-recommendation)"]:::highlighted
+    feedback_loop --> sagemaker
+
 ```
 
 ## App Screenshots
