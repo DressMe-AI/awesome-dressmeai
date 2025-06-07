@@ -18,6 +18,16 @@ This collection includes the app frontend, machine learning pipelines, annotatio
 
 ---
 
+## Looking for UI/UX Contributors
+
+I'm currently seeking contributors to help improve the UI design of an Android app. If you have a good eye for aesthetics, interface layout, color schemes, or general UX design, I'd love your input.  
+
+Whether you're experienced in Material Design, prototyping, or just have a knack for clean, intuitive interfaces, feel free to reach out.  
+
+Contact: erimyanik@gmail.com
+
+---
+
 ## Repositories
 
 ### Frontend
