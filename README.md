@@ -84,7 +84,10 @@ flowchart TD
     I2_c --> I_common
 
     %% Mode 3
-    I3_start["💬 Mode 3: Prompt-Based Recommendation"] --> I3_a["User enters free-text prompt"]
+    I3_start["💬 Mode 3: Prompt-Based Recommendation"] --> I3_input_type["🎙️ User types or speaks"]
+    I3_input_type --> I3_a["User enters free-text prompt"]
+    I3_input_type --> I3_voice["Deepgram STT converts speech"]:::external
+    I3_voice --> I3_a
     I3_a --> I3_fallback["🧹 User clears prompt"]
     I3_fallback --> I1_b
     I3_a --> I3_b["Prompt sent to LLM agent"]
